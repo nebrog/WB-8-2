@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SeventhWeekApp</string>
+    <string name="name">Имя персонажа: %s</string>
+    <string name="intelligence">Интеллект: </string>
+    <string name="strength">Сила: </string>
+    <string name="speed">Скорость: </string>
+    <string name="durability">Стойкоксть: </string>
+    <string name="power">Энерегия: </string>
+    <string name="combat">Сражение: </string>
+
+
+
+
+
+
+
+
+
+</resources>
