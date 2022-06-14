@@ -5,8 +5,8 @@ import com.example.seventhweekapppt2.data.model.SuperHeroesItem
 import com.example.seventhweekapppt2.ui.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import java.io.IOException
-import java.text.ParseException
 
 class NetworkRepository(
 
@@ -17,16 +17,14 @@ class NetworkRepository(
         return withContext(Dispatchers.IO) {
             try {
                 val hero = retrofitServices.getSuperHero(id)
-                return@withContext hero.body()
+                return@withContext hero
 
             } catch (e: IOException) {
                 return@withContext null
 
-            } catch (e: ParseException) {
+            } catch (e: HttpException) {
                 return@withContext null
-
             }
-
         }
     }
 }

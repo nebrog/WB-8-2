@@ -6,16 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.seventhweekapppt2.App
 import com.example.seventhweekapppt2.R
-import com.example.seventhweekapppt2.data.NetworkRepository
-import com.example.seventhweekapppt2.data.api.SuperHeroAPI
 import com.example.seventhweekapppt2.data.model.SuperHeroesItem
 import com.example.seventhweekapppt2.ui.Hero.HeroActivity
 
 @ExperimentalStdlibApi
-class HeroesActivity : AppCompatActivity(),OnHeroClickListener {
+class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
 
-    private val adapter = HeroesAdapter(lifecycleScope, NetworkRepository(SuperHeroAPI.retrofitServices), this)
+    private val adapter by lazy {
+        HeroesAdapter(lifecycleScope, (applicationContext as App).repository, this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +28,9 @@ class HeroesActivity : AppCompatActivity(),OnHeroClickListener {
     }
 
 
-
     override fun onClick(hero: SuperHeroesItem) {
-        val intent = Intent(this,HeroActivity::class.java)
-        intent.putExtra("hero",hero)
+        val intent = Intent(this, HeroActivity::class.java)
+        intent.putExtra("hero", hero)
         startActivity(intent)
     }
 }

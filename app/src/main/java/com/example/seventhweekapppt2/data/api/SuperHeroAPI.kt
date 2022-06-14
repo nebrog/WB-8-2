@@ -34,6 +34,6 @@ object SuperHeroAPI {
 
 interface RetrofitServices {
     @GET("id/{id}.json")
-    suspend fun getSuperHero(@Path("id") id: Int):Response <SuperHeroesItem>
+    suspend fun getSuperHero(@Path("id") id: Int): SuperHeroesItem
 
 }
