@@ -7,13 +7,9 @@
     <string name="durability">Стойкоксть: </string>
     <string name="power">Энерегия: </string>
     <string name="combat">Сражение: </string>
-
-
-
-
-
-
-
+    <string name="my_name">Разработчик: Горбенко Владислав</string>
+    <string name="github">Ссылка: https://github.com/nebrog</string>
+    <string name="date">Дата создания: 18.06.2022</string>
 
 
 </resources>

@@ -3,14 +3,17 @@ package com.example.wb_8_2.ui.Hero
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
+import com.example.wb_8_2.App
 import com.example.wb_8_2.R
 import com.example.wb_8_2.data.model.SuperHeroesItem
-import com.example.wb_8_2.ui.SuperHeroes.HeroesActivity
+import com.example.wb_8_2.ui.InfoActivity
 import com.github.terrakok.cicerone.androidx.ActivityScreen
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.squareup.picasso.Picasso
 
 class HeroActivity : AppCompatActivity() {
@@ -20,10 +23,19 @@ class HeroActivity : AppCompatActivity() {
 
     private val heroItem: SuperHeroesItem by lazy { intent.getSerializableExtra(HERO_ARG) as SuperHeroesItem }
 
+    override fun onResume() {
+        super.onResume()
+        (applicationContext as App).navigatorHolder.setNavigator(AppNavigator(this,-1))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (applicationContext as App).navigatorHolder.removeNavigator()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hero)
-        supportActionBar?.hide()
         val img = findViewById<ImageView>(R.id.hero_img_fullscreen)
         val name = findViewById<TextView>(R.id.hero_name_fullscreen)
         val intelligence = findViewById<TextView>(R.id.hero_intelligence_fullscreen)
@@ -42,11 +54,22 @@ class HeroActivity : AppCompatActivity() {
         power.text = "${getString(R.string.power)} ${heroItem.powerstats.power}"
         combat.text = "${getString(R.string.combat)} ${heroItem.powerstats.combat}"
     }
-    class HeroScreen (private val item: SuperHeroesItem): ActivityScreen{
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        (applicationContext as App).router.navigateTo(InfoActivity.InfoScreen())
+        return super.onOptionsItemSelected(item)
+    }
+
+    class HeroScreen(private val item: SuperHeroesItem) : ActivityScreen {
 
         override fun createIntent(context: Context): Intent {
             val intent = Intent(context, HeroActivity::class.java)
-            intent.putExtra(HERO_ARG,item)
+            intent.putExtra(HERO_ARG, item)
             return intent
         }
     }
