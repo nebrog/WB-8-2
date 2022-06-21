@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SeventhWeekApp</string>
+    <string name="app_name">WB-8-2</string>
     <string name="name">Имя персонажа: %s</string>
     <string name="intelligence">Интеллект: </string>
     <string name="strength">Сила: </string>

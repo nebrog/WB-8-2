@@ -1,4 +1,4 @@
-package com.example.seventhweekapppt2.ui.SuperHeroes
+package com.example.wb_8_2.ui.SuperHeroes
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,16 +6,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seventhweekapppt2.App
-import com.example.seventhweekapppt2.R
-import com.example.seventhweekapppt2.data.model.SuperHeroesItem
-import com.example.seventhweekapppt2.ui.Hero.HeroActivity
+import com.example.wb_8_2.App
+import com.example.wb_8_2.data.model.SuperHeroesItem
+import com.example.wb_8_2.ui.Hero.HeroActivity
+import com.example.wb_8_2.R
+import com.github.terrakok.cicerone.androidx.AppNavigator
 
 @ExperimentalStdlibApi
 class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
 
+
     private val adapter by lazy {
         HeroesAdapter(lifecycleScope, (applicationContext as App).repository, this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (applicationContext as App).navigatorHolder.setNavigator(AppNavigator(this,-1))
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (applicationContext as App).navigatorHolder.removeNavigator()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +42,7 @@ class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
 
 
     override fun onClick(hero: SuperHeroesItem) {
-        val intent = Intent(this, HeroActivity::class.java)
-        intent.putExtra("hero", hero)
-        startActivity(intent)
+        (applicationContext as App).router.navigateTo(HeroActivity.HeroScreen(hero))
+
     }
 }

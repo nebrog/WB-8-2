@@ -1,10 +1,8 @@
-package com.example.seventhweekapppt2.data.api
+package com.example.wb_8_2.data.api
 
-import com.example.seventhweekapppt2.data.model.SuperHeroesItem
+import com.example.wb_8_2.data.model.SuperHeroesItem
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

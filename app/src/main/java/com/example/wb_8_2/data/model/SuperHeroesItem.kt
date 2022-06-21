@@ -1,4 +1,4 @@
-package com.example.seventhweekapppt2.data.model
+package com.example.wb_8_2.data.model
 
 
 import com.google.gson.annotations.SerializedName

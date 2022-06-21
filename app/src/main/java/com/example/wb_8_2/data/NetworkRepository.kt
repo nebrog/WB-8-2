@@ -1,8 +1,8 @@
-package com.example.seventhweekapppt2.data
+package com.example.wb_8_2.data
 
-import com.example.seventhweekapppt2.data.api.RetrofitServices
-import com.example.seventhweekapppt2.data.model.SuperHeroesItem
-import com.example.seventhweekapppt2.ui.Repository
+import com.example.wb_8_2.data.api.RetrofitServices
+import com.example.wb_8_2.data.model.SuperHeroesItem
+import com.example.wb_8_2.ui.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

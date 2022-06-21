@@ -1,4 +1,4 @@
-package com.example.seventhweekapppt2.ui.SuperHeroes
+package com.example.wb_8_2.ui.SuperHeroes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seventhweekapppt2.R
-import com.example.seventhweekapppt2.data.model.SuperHeroesItem
-import com.example.seventhweekapppt2.ui.Repository
+import com.example.wb_8_2.data.model.SuperHeroesItem
+import com.example.wb_8_2.ui.Repository
+import com.example.wb_8_2.R
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
