@@ -4,7 +4,7 @@ import com.example.wb_8_2.data.model.SuperHeroesItem
 import com.example.wb_8_2.ui.Repository
 import javax.inject.Inject
 
-class ComposeRepository  @Inject constructor(
+class ComposeRepository @Inject constructor(
     private val networkRepository: NetworkRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository,
 ) : Repository {

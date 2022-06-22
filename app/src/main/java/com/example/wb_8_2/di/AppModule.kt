@@ -7,6 +7,9 @@ import com.example.wb_8_2.data.ComposeRepository
 import com.example.wb_8_2.data.api.RetrofitServices
 import com.example.wb_8_2.data.api.SuperHeroAPI
 import com.example.wb_8_2.ui.Repository
+import com.github.terrakok.cicerone.Cicerone
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -22,6 +25,21 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    private val cicerone = Cicerone.create()
+
+    @Provides
+    @Singleton
+    fun provideRouter(): Router {
+        return cicerone.router
+    }
+
+    @Provides
+    @Singleton
+    fun provideNavHolder(): NavigatorHolder {
+        return cicerone.getNavigatorHolder()
+    }
+
 
     @Provides
     @Singleton

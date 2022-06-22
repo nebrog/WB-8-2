@@ -8,14 +8,16 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.wb_8_2.App
 import com.example.wb_8_2.R
 import com.example.wb_8_2.data.model.SuperHeroesItem
 import com.example.wb_8_2.ui.InfoActivity
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HeroActivity : AppCompatActivity() {
@@ -23,16 +25,22 @@ class HeroActivity : AppCompatActivity() {
         const val HERO_ARG = "hero"
     }
 
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
     private val heroItem: SuperHeroesItem by lazy { intent.getSerializableExtra(HERO_ARG) as SuperHeroesItem }
 
     override fun onResume() {
         super.onResume()
-        (applicationContext as App).navigatorHolder.setNavigator(AppNavigator(this, -1))
+        navigatorHolder.setNavigator(AppNavigator(this, -1))
     }
 
     override fun onPause() {
         super.onPause()
-        (applicationContext as App).navigatorHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +71,7 @@ class HeroActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        (applicationContext as App).router.navigateTo(InfoActivity.InfoScreen())
+        router.navigateTo(InfoActivity.InfoScreen())
         return super.onOptionsItemSelected(item)
     }
 

@@ -32,7 +32,6 @@ android {
         jvmTarget = '1.8'
     }
 }
-apply plugin: 'kotlin-kapt'
 
 dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"

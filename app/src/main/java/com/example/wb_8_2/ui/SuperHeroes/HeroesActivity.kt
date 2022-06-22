@@ -7,12 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wb_8_2.App
 import com.example.wb_8_2.R
 import com.example.wb_8_2.data.model.SuperHeroesItem
 import com.example.wb_8_2.ui.Hero.HeroActivity
 import com.example.wb_8_2.ui.InfoActivity
 import com.example.wb_8_2.ui.Repository
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,18 +25,24 @@ class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
     @Inject
     lateinit var repository: Repository
 
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
     private val adapter by lazy {
         HeroesAdapter(lifecycleScope, repository, this)
     }
 
     override fun onResume() {
         super.onResume()
-        (applicationContext as App).navigatorHolder.setNavigator(AppNavigator(this, -1))
+        navigatorHolder.setNavigator(AppNavigator(this, -1))
     }
 
     override fun onPause() {
         super.onPause()
-        (applicationContext as App).navigatorHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +55,7 @@ class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
 
 
     override fun onClick(hero: SuperHeroesItem) {
-        (applicationContext as App).router.navigateTo(HeroActivity.HeroScreen(hero))
+        router.navigateTo(HeroActivity.HeroScreen(hero))
 
     }
 
@@ -58,7 +65,7 @@ class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        (applicationContext as App).router.navigateTo(InfoActivity.InfoScreen())
+        router.navigateTo(InfoActivity.InfoScreen())
         return super.onOptionsItemSelected(item)
     }
 
