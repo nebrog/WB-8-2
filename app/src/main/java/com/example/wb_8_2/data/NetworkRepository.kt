@@ -7,11 +7,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class NetworkRepository(
-
+class NetworkRepository @Inject constructor(
     private val retrofitServices: RetrofitServices
-
 ) : Repository {
     override suspend fun loadHero(id: Int): SuperHeroesItem? {
         return withContext(Dispatchers.IO) {

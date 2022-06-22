@@ -15,7 +15,9 @@ import com.example.wb_8_2.ui.InfoActivity
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HeroActivity : AppCompatActivity() {
     companion object {
         const val HERO_ARG = "hero"
@@ -25,7 +27,7 @@ class HeroActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        (applicationContext as App).navigatorHolder.setNavigator(AppNavigator(this,-1))
+        (applicationContext as App).navigatorHolder.setNavigator(AppNavigator(this, -1))
     }
 
     override fun onPause() {

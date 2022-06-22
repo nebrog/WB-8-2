@@ -4,20 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/primary">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/my_name"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:paddingVertical="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/github"
+        android:autoLink="web"
+        android:linksClickable="true"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:paddingVertical="10dp"/>
     <TextView
@@ -25,6 +30,7 @@
         android:layout_height="wrap_content"
         android:text="@string/date"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:paddingVertical="10dp"/>
 

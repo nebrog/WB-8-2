@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wb_8_2.R
 import com.example.wb_8_2.data.model.SuperHeroesItem
 import com.example.wb_8_2.ui.Repository
-import com.example.wb_8_2.R
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

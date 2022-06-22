@@ -6,8 +6,9 @@ import com.example.wb_8_2.ui.Repository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class SharedPreferencesRepository(
+class SharedPreferencesRepository @Inject constructor(
     private val preferences: SharedPreferences,
     private val gson: Gson,
 ) : Repository {
