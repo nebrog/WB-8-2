@@ -3,6 +3,7 @@ package com.example.wb_8_2.ui.SuperHeroes
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,22 +19,13 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@ExperimentalStdlibApi
 @AndroidEntryPoint
 class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
 
-    @Inject
-    lateinit var repository: Repository
-
-    @Inject
-    lateinit var router: Router
+    private val viewModel: HeroesViewModel by viewModels()
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
-
-    private val adapter by lazy {
-        HeroesAdapter(lifecycleScope, repository, this)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -48,15 +40,11 @@ class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heroes)
-        val recycler = findViewById<RecyclerView>(R.id.recycler)
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = adapter
+        setupRecycler()
     }
 
-
     override fun onClick(hero: SuperHeroesItem) {
-        router.navigateTo(HeroActivity.HeroScreen(hero))
-
+        viewModel.onHeroClick(hero)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -65,8 +53,22 @@ class HeroesActivity : AppCompatActivity(), OnHeroClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        router.navigateTo(InfoActivity.InfoScreen())
-        return super.onOptionsItemSelected(item)
+        viewModel.onInfoClick()
+        return true
     }
 
+    private fun setupRecycler() {
+        val recycler = findViewById<RecyclerView>(R.id.recycler)
+        val adapter = HeroesAdapter(this)
+
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
+
+        viewModel.heroesList.observe(this) { heroes ->
+            adapter.setData(heroes)
+        }
+        viewModel.progressVisibility.observe(this) { isVisible ->
+            adapter.setProgressVisibility(isVisible)
+        }
+    }
 }
